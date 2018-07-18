@@ -1,0 +1,23 @@
+<div class="row search-row">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6 s12 white-text">
+                <i class="white-text material-icons prefix dropdown-button">search</i>
+                <input type="text" placeholder="Enter URL" id="url-input" class="autocomplete white-text">
+                <div class='dropdown-trigger' data-target='link-dropdown'></div>
+            </div>
+        </div>
+    </form>
+    <ul id='link-dropdown' class='dropdown-content'>
+    </ul>
+</div>
+
+<div></div>
+
+<div class="row video-container">
+    <video id="video-player" class="col s6" controls></video>
+    <div class="col s6">
+      <canvas id="c1" style="display: none"></canvas>
+      <canvas id="c2"></canvas>
+    </div>
+</div>

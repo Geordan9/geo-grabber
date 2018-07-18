@@ -1,0 +1,24 @@
+{
+  "name": "geo-grabber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "jquery": "^3.3.1",
+    "material-design-icons": "^3.0.1",
+    "materialize-css": "^1.0.0-rc.2",
+    "request": "^2.87.0"
+  }
+}

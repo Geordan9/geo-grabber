@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" href="/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/m-iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script type="text/javascript" src="/jquery/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src='/lib/webdsp.js' type='text/javascript'></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <title>Geo Grabber</title>
+</head>
+
+<body bgcolor="#0D0505" onload="processor.doLoad()">
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <span class="brand-logo">Geo Grabber</span>
+                <a id="sidenav-button" data-target="sidemenu" class="right">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/videos">Video Analyser</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav fixed" id="sidemenu">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/videos">Video Analyser</a>
+            </li>
+        </ul>
+    </div>
+
+    {{{ body }}}
+    <script src="/materialize/js/materialize.min.js"></script>
+    <script src="/js/view.js"></script>
+</body>
+
+</html>

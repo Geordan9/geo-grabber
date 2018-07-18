@@ -1,0 +1,107 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+a, .input-field > i {
+    cursor: pointer;
+}
+
+.input-field > i:hover {
+    color: red !important;
+}
+
+.input-field > input:focus {
+    border-bottom-color: #FF0000FF !important;
+    box-shadow: 0 1px 0 0 #D00000FF !important;
+}
+
+.search-row {
+    height: 100px;
+}
+
+.dropdown-trigger {
+    visibility: hidden;
+    position: absolute;
+}
+
+.button-container {
+    height: 100%;
+}
+
+body .url-link,
+.dropdown-content {
+    color: #FFFFFFFF; 
+    text-align: left;
+    text-transform: none;
+    background-color: #500000FF;
+}
+
+.url-link p {
+    padding: 5px 5px;
+}
+
+.dropdown-content {
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.dropdown-content:hover,
+.url-link:hover {
+    background-color: #900000FF !important;
+}
+
+.video-container {
+    padding: 0px;
+    height: 70%;
+}
+
+#video-player {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#c2 {
+    width: 100%;
+}
+
+nav>div {
+    background-color: #800000FF;
+    color: #FFFFFFFF;
+}
+
+.sidenav>li>a {
+    color: #FFFFFFFF;
+}
+
+.sidenav>li>a:hover {
+    background-color: #300000FF;
+}
+
+.sidenav {
+    background-color: #500000FF;
+}
+
+.sidenav-overlay {
+    z-index: 1;
+}
+
+#sidenav-button {
+    margin: 0px 20px;
+    user-select: none;
+    display: none;
+}
+
+@media (max-width: 992px) {
+    #sidenav-button {
+        display: block;
+    }
+}
+
+@media (max-width: 865px) {
+    .dropdown-button > i {
+        display: none;
+    }
+}
