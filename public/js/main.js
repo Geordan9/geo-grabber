@@ -7,6 +7,44 @@ loadWASM("/lib/webdsp_c.wasm").then(module => {
 
 let procFunc;
 
+const filterSettings = {
+    grayScale: {
+        enabled: false
+    },
+    brighten: {
+        enabled: false
+    },
+    invert: {
+        enabled: false
+    },
+    noise: {
+        enabled: false
+    },
+    sobelFilter: {
+        enabled: false,
+        width: 0,
+        height: 0,
+        invert: false
+    },
+    convFilter: {
+        enabled: false,
+        width: 0,
+        height: 0,
+        kernel: "",
+        divisor: "",
+        bias: 0,
+        count: 1
+    },
+    multiFilter: {
+        enabled: false,
+        width: 0,
+        filterType: "",
+        mag: 0,
+        multiplier: 0,
+        adjacent: 0
+    }
+}
+
 processor.doLoad = function () {
         this.video = document.getElementById('video-player');
         this.c1 = document.getElementById('c1');
@@ -37,6 +75,7 @@ processor.doLoad = function () {
     processor.computeFrame = function () {
         this.ctx1.drawImage(this.video, 0, 0, this.width, this.height);
         let frame = this.ctx1.getImageData(0, 0, this.width, this.height);
+        // web-dsp stuff
         frame.data.set(webdsp.invert(frame.data));
         let l = frame.data.length / 4;
 
@@ -49,3 +88,23 @@ processor.doLoad = function () {
         this.ctx2.putImageData(frame, 0, 0);
         return;
     }
+
+function videoFilter(frameData) {
+
+    //filters
+    if (filterSettings.grayScale.enabled){
+        webdsp.grayScale(frameData);
+    }
+    else if (filterSettings.brighten.enabled) {
+        webdsp.brighten(frameData);
+    }
+    else if (filterSettings.invert.enabled) {
+        webdsp.invert(frameData);
+    }
+    else if (filterSettings.noise.enabled) {
+        webdsp.noise(frameData)
+    }
+
+
+    return frameData;
+}

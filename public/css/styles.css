@@ -1,6 +1,9 @@
-html, body {
-    height: 100%;
-    overflow: hidden;
+body {
+    overflow: hidden !important;
+}
+
+i, div, .material-icons {
+    user-select: none;
 }
 
 a, .input-field > i {
@@ -14,6 +17,13 @@ a, .input-field > i {
 .input-field > input:focus {
     border-bottom-color: #FF0000FF !important;
     box-shadow: 0 1px 0 0 #D00000FF !important;
+}
+
+.btn {
+    background-color: #900000FF;
+}
+.btn:hover {
+    background-color: #D00000FF;
 }
 
 .search-row {
@@ -53,17 +63,22 @@ body .url-link,
 }
 
 .video-container {
+    margin: 0px;
     padding: 0px;
-    height: 70%;
+    height: 100%;
+    width: 100%;
 }
 
 #video-player {
     display: block;
-    width: 50%;
     margin: 0 auto;
 }
 
-#c2 {
+#video-player, #c2 {
+    width: 100%;
+}
+
+.basic-buttons {
     width: 100%;
 }
 
