@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 
 import { Button } from 'rmwc/Button';
 import { Grid, GridCell, GridInner } from 'rmwc/Grid';
 import TopBar from "./components/TopBar.js";
 import Drawer from "./components/Drawer.js";
 import { Elevation } from 'rmwc/Elevation';
+import { LoginForm } from "./components/LoginForm.js";
 
 import {
   BrowserRouter as Router,
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
+  Switch
 } from "react-router-dom";
 
 import { login } from "./API.js";
@@ -25,19 +26,26 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+      <div>
           <TopBar />
-          <Drawer 
-          open={this.state.tempOpen}
-          onClose={() => this.setState({tempOpen: false})}
-          />
-         <Route path="/login" component={Login} />
-         <PrivateRoute path="/app" 
-          openDrawer={() => {
-            this.setState({ tempOpen: true })
-            console.log("SDF");
-          }}
-          component={GridComp} />
+          <div className="flex justify-center">
+            <div className="mt4">
+              <LoginForm className="mt4" />
+              <Drawer 
+              open={this.state.tempOpen}
+              onClose={() => this.setState({tempOpen: false})}
+              />
+              <Switch>
+                <Route path="/login" component={Login} />
+                <PrivateRoute path="/" 
+                  openDrawer={() => {
+                    this.setState({ tempOpen: true })
+                    console.log("SDF");
+                  }}
+                  component={GridComp} />
+              </Switch>
+            </div>
+          </div>
         </div>
       </Router>
     );
@@ -46,7 +54,7 @@ class App extends Component {
 
 const GridComp = (props) => {
   return (
-    <Grid className="pt4">
+    <Grid>
       <GridCell className="flex justify-center" span="4"><Button onClick={props.openDrawer}>Hello World</Button></GridCell>
       <GridCell className="flex justify-center" span="4"><Elevation z={8}><Button>Hello World</Button></Elevation></GridCell>
       <GridCell className="flex justify-center" span="4"><Button>Hello World</Button></GridCell>
@@ -72,7 +80,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   return <Route
     {...rest}
     render={props => {
-      console.log(props);
       return fakeAuth.isAuthenticated ? (
         <Component {...props} {...rest} />
       ) : (
@@ -100,7 +107,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: "/app" } };
+    const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { redirectToReferrer } = this.state;
 
     if (redirectToReferrer) {
