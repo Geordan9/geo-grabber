@@ -21,8 +21,14 @@ const styles = {
     "background-color": "white !important",
     "&:hover": {
         "background-color": "white !important"
+    },
+    "&:before": {
+      "background-color": "white !important"
+    },
+    "&:after": {
+      "background-color": "white !important"
     }
-  },
+  }
 }
 const { classes } = jss.createStyleSheet(styles).attach()
 
