@@ -42,6 +42,9 @@ export class LoginForm extends Component {
   render() {
     return (
       <Card {...this.props} style={{ width: "21rem" }}>
+        <Card style={{ width: "21rem"}}>
+        
+        </Card>
         <div className="flex flex-column m1">
           <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="person" label="Username" />
           <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="person" label="Username" />

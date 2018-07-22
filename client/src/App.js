@@ -29,7 +29,7 @@ class App extends Component {
       <div>
           <TopBar />
           <div className="flex justify-center">
-            <div className="mt4">
+            <div className="mt4 flex flex-column content-stretch">
               <LoginForm className="mt4" />
               <Drawer 
               open={this.state.tempOpen}
