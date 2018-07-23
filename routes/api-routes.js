@@ -29,9 +29,29 @@ module.exports = (app, db) => {
         console.log();
     });
 
-    app.post("/api/sendaccount", (req, res) => {
+    app.post("/api/login", (req, res) => {
         const account = req.body;
-        console.log(findAccount(db, account));
+        findAccount(db, account).then((foundAccount, err) => {
+            if (typeof foundAccount != "undefined") {
+                if (account.password === foundAccount.password) {
+                    res.send(true);
+                }
+            } else {
+                res.send(false)
+            }
+        });
+    });
+
+    app.post("/api/register", (req, res) => {
+        const account = req.body;
+        findAccount(db, account).then((foundAccount, err) => {
+            if (typeof foundAccount == "undefined") {
+                createAccount(db, account);
+                res.send("Successfully create account.")
+            } else {
+                res.send("Username already exists!");
+            }
+        });
     });
 };
 
@@ -83,12 +103,11 @@ function grabYouTubeURLs(videoUrl, res) {
 }
 
 function findAccount(db, account) {
-    db.Account.findOne({username: account.username})
-    .then((dbAccount) => {
-        return dbAccount;
-    })
-    .catch((err) => {
-        console.log(err);
-        return null;
-    });
+    return db.Account.findOne({
+        username: account.username
+    }).exec();
+}
+
+function createAccount(db, account) {
+    return db.Account.create(account);
 }

@@ -1,8 +1,8 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var AccountSchema = new Schema({
+const AccountSchema = new Schema({
   username: {
     type: String,
     required: true
@@ -14,7 +14,7 @@ var AccountSchema = new Schema({
   email: {
     type: String,
     validate: {
-      validator: function (v) {
+      validator(v) {
         return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(v);
       },
       message: '{VALUE} is not a valid e-mail!'
@@ -23,6 +23,6 @@ var AccountSchema = new Schema({
   }
 });
 
-var Account = mongoose.model("Account", AccountSchema);
+const Account = mongoose.model("Account", AccountSchema);
 
 module.exports = Account;

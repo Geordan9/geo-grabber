@@ -1,5 +1,25 @@
+var opts = {
+    onstart: function onStart() {
+        console.log('Recorder is started');
+    },
+    onstop: function onStop(Blob) {
+        videoElement.src = URL.createObjectURL(blob);
+    },
+    workerPath: './media-recorder/qbAudioRecorderWorker.js'
+};
+ 
+var recorder = new QBMediaRecorder(opts);
+
+
+
+
+
+
+
+
+
+
 function startRecording() {
-    console.log("test");
     const btn = this;
     btn.onclick = stopRecording;
     const video = document.getElementById('video-player-2');

@@ -26,6 +26,7 @@ app.use(express.static("public"));
 app.use("/materialize", express.static("./node_modules/materialize-css/dist"));
 app.use("/materialize-iconfont", express.static("./node_modules/material-design-icons/iconfont"));
 app.use("/jquery", express.static("./node_modules/jquery/dist"));
+app.use("/media-recorder", express.static("./node_modules/media-recorder-js"))
 
 mongoose.connect(`mongodb://localhost:27017/accounts`, {useNewUrlParser: true,});
 

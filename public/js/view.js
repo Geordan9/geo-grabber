@@ -95,11 +95,32 @@ $(document).ready(() => {
       $("#errmsg").text("Please fillout everything.")
     } else {
       $("#errmsg").text("");
-      $.post("/api/sendaccount", account, function(res) {
-        console.log(res);
+      $.post("/api/login", account, function(res) {
+        if (res){
+
+        }
+        else {
+          $("#errmsg").text("Incorrect username and/or password.");
+        }
       });
     }
 
+  });
+
+  $("#register-button").on("click", function () {
+    const account = {
+      username: $("#username").val(),
+      password: $("#password").val(),
+      email: $("#email").val()
+    };
+    if (account.username === "" || account.password === "" || account.email === "") {
+      $("#errmsg").text("Please fillout everything.")
+    } else {
+      $("#errmsg").text("");
+      $.post("/api/register", account, function(res) {
+        console.log(res);
+      });
+    }
   });
 
   $(window).resize(() => {
