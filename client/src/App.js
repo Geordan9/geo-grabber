@@ -28,8 +28,8 @@ class App extends Component {
       <Router>
       <div>
           <TopBar />
-          <div className="flex justify-center">
-            <div className="mt4 flex flex-column content-stretch">
+          <div className="flex">
+            <div style={{flexGrow: 1}} className="mt4 flex flex-column">
               <LoginForm className="mt4" />
               <Drawer 
               open={this.state.tempOpen}

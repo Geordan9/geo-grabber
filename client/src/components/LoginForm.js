@@ -41,15 +41,11 @@ export class LoginForm extends Component {
 
   render() {
     return (
-      <Card {...this.props} style={{ width: "21rem" }}>
-        <Card style={{ width: "21rem"}}>
-        
-        </Card>
+      <Card {...this.props} style={{ width: "21rem", alignSelf: "center" }}>
         <div className="flex flex-column m1">
           <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="person" label="Username" />
-          <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="person" label="Username" />
-          <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="person" label="Username" />
-
+          <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="email" label="Email" />
+          <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="lock" label="Password" />
         </div>
         <CardPrimaryAction>
           <CardActions className="flex justify-center">
