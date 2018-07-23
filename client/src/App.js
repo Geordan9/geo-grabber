@@ -34,8 +34,10 @@ const { classes } = jss.createStyleSheet(styles).attach()
 
 class App extends Component {
   state = {
-    tempOpen: false
+    tempOpen: false,
+    url: "asdas"
   }
+
   render() {
     return (
       <Router>
@@ -54,7 +56,8 @@ class App extends Component {
                     this.setState({ tempOpen: true })
                     console.log("SDF");
                   }}
-                  component={GridComp} />
+                  component={GridComp} 
+                />
               </Switch>
             </div>
           </div>
@@ -64,40 +67,58 @@ class App extends Component {
   }
 }
 
-const GridComp = (props) => {
-  return (
-    <Grid style={{width: "90%"}}>
-      <GridCell className="flex justify-center" desktop="12" tablet="8" phone="4">
-        <TextField className={classes.w100} withLeadingIcon="search" label="Search" />
-        <Select
-          className="mt1 ml1"
-          outlined={true}
-          placeholder="Quality"
-          options={['Cookies', 'Pizza', 'Icecream']}
-        />
-      </GridCell>
-      <GridCell className="flex justify-center" desktop="6" tablet="8" phone="4">
-      <video style={{height: "100%"}} id="video-player" controls></video>
-      </GridCell>
-      <GridCell desktop="6" tablet="8" phone="4">
-        <canvas id="c1" style={{display: "none"}}></canvas>
-        <canvas id="c2" style={{display: "none"}}></canvas>
-        <video id="video-player-2" controls></video>
-      </GridCell>
-      <GridCell desktop="12" tablet="8" phone="4">
-        <div className="flex justify-between">
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-        </div>
-      </GridCell>
-    </Grid>
-  );
+class GridComp extends Component {
+  state = {
+    url: "youtube.com/",
+    freshUrl: true
+  }
+
+  handleSearchInput = (event) => {
+    this.setState({ url: event.target.value });
+    this.setState({ freshUrl: true })
+  }
+
+  handleKeyPress = (e) => {
+    if (e.key !== 'Enter' || !this.state.freshUrl) return;
+    this.setState({ freshUrl: false })
+    
+  }
+
+  render() {
+    return (
+      <Grid style={{width: "90%"}}>
+        <GridCell className="flex justify-center" desktop="12" tablet="8" phone="4">
+          <TextField onKeyPress={this.handleKeyPress} onChange={this.handleSearchInput} value={this.state.url} className={classes.w100} withLeadingIcon="search" label="Search" />
+          <Select
+            className="mt1 ml1"
+            outlined={true}
+            placeholder="Quality"
+            options={['Cookies', 'Pizza', 'Icecream']}
+          />
+        </GridCell>
+        <GridCell className="flex justify-center" desktop="6" tablet="8" phone="4">
+        <video style={{height: "100%"}} id="video-player" controls></video>
+        </GridCell>
+        <GridCell desktop="6" tablet="8" phone="4">
+          <canvas id="c1" style={{display: "none"}}></canvas>
+          <canvas id="c2" style={{display: "none"}}></canvas>
+          <video id="video-player-2" controls></video>
+        </GridCell>
+        <GridCell desktop="12" tablet="8" phone="4">
+          <div className="flex justify-between">
+            <Button unelevated>Unelevated</Button>
+            <Button unelevated>Unelevated</Button>
+            <Button unelevated>Unelevated</Button>
+            <Button unelevated>Unelevated</Button>
+            <Button unelevated>Unelevated</Button>
+            <Button unelevated>Unelevated</Button>
+            <Button unelevated>Unelevated</Button>
+            <Button unelevated>Unelevated</Button>
+          </div>
+        </GridCell>
+      </Grid>
+    );
+  }
 }
 
 const fakeAuth = {
