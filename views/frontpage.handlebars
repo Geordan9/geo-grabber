@@ -21,7 +21,8 @@
 
     <div class="col s6">
         <canvas id="c1" style="display: none"></canvas>
-        <canvas id="c2"></canvas>
+        <canvas id="c2" style="display: none"></canvas>
+        <video id="video-player-2" controls></video>
     </div>
 </div>
 
@@ -29,9 +30,12 @@
 
 <div class="row control-container">
     <div class="col s6">
-        <a class="waves-effect waves-light btn">Gray Scale</a>
-        <a class="waves-effect waves-light btn">Brighten</a>
-        <a class="waves-effect waves-light btn">Invert</a>
-        <a class="waves-effect waves-light btn">Noise</a>
+        <a class="waves-effect waves-light btn filters" data-type="grayScale">Gray Scale</a>
+        <a class="waves-effect waves-light btn filters" data-type="brighten">Brighten</a>
+        <a class="waves-effect waves-light btn filters" data-type="invert">Invert</a>
+        <a class="waves-effect waves-light btn filters" data-type="noise">Noise</a>
+        <a id="download" class="waves-effect waves-light btn">Download</a>
     </div>
 </div>
+
+<script src="/js/streamRecorder.js"></script>

@@ -7,6 +7,15 @@ loadWASM("/lib/webdsp_c.wasm").then(module => {
 
 let procFunc;
 
+let filter = "invert";
+
+$(document).ready(() => {
+    $(".filters").on("click", function () {
+        filter = $(this).data("type");
+    });
+});
+
+
 const filterSettings = {
     grayScale: {
         enabled: false
@@ -47,6 +56,7 @@ const filterSettings = {
 
 processor.doLoad = function () {
         this.video = document.getElementById('video-player');
+        this.video2 = document.getElementById('video-player-2');
         this.c1 = document.getElementById('c1');
         this.ctx1 = this.c1.getContext('2d');
         this.c2 = document.getElementById('c2');
@@ -59,6 +69,7 @@ processor.doLoad = function () {
             self.c1.height = self.video.videoHeight;
             self.c2.width = self.video.videoWidth;
             self.c2.height = self.video.videoHeight;
+            self.video2.srcObject = c2.captureStream();
             self.timerCallback();
         }, false);
     },
@@ -76,7 +87,8 @@ processor.doLoad = function () {
         this.ctx1.drawImage(this.video, 0, 0, this.width, this.height);
         let frame = this.ctx1.getImageData(0, 0, this.width, this.height);
         // web-dsp stuff
-        frame.data.set(webdsp.invert(frame.data));
+        frame.data.set(webdsp[filter](frame.data));
+        frame.data.set(webdsp["grayScale"](frame.data));
         let l = frame.data.length / 4;
 
         for (let i = 0; i < l; i++) {
@@ -92,16 +104,13 @@ processor.doLoad = function () {
 function videoFilter(frameData) {
 
     //filters
-    if (filterSettings.grayScale.enabled){
+    if (filterSettings.grayScale.enabled) {
         webdsp.grayScale(frameData);
-    }
-    else if (filterSettings.brighten.enabled) {
+    } else if (filterSettings.brighten.enabled) {
         webdsp.brighten(frameData);
-    }
-    else if (filterSettings.invert.enabled) {
+    } else if (filterSettings.invert.enabled) {
         webdsp.invert(frameData);
-    }
-    else if (filterSettings.noise.enabled) {
+    } else if (filterSettings.noise.enabled) {
         webdsp.noise(frameData)
     }
 

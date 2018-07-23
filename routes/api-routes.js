@@ -2,7 +2,7 @@ const request = require("request");
 const https = require("https");
 const fs = require("fs");
 
-module.exports = app => {
+module.exports = (app, db) => {
     app.post("/api/geturls", (req, res) => {
         if (/(youtu*.be)/g.test(req.body.url)) {
             grabYouTubeURLs(req.body.url, res);
@@ -27,6 +27,11 @@ module.exports = app => {
 
     app.get("/api/webdsp", (req, res) => {
         console.log();
+    });
+
+    app.post("/api/sendaccount", (req, res) => {
+        const account = req.body;
+        console.log(findAccount(db, account));
     });
 };
 
@@ -75,4 +80,15 @@ function grabYouTubeURLs(videoUrl, res) {
         });
         return urls;
     }
+}
+
+function findAccount(db, account) {
+    db.Account.findOne({username: account.username})
+    .then((dbAccount) => {
+        return dbAccount;
+    })
+    .catch((err) => {
+        console.log(err);
+        return null;
+    });
 }

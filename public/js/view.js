@@ -6,6 +6,11 @@ $(document).ready(() => {
     coverTrigger: false,
     closeOnClick: true
   });
+
+  $(document).ready(function () {
+    $('.modal').modal();
+  });
+
   $(".sidenav").css("margin-top", $(".navbar-fixed").height());
   $('.sidenav').sidenav({
     edge: 'right'
@@ -75,6 +80,26 @@ $(document).ready(() => {
     } else {
       sideNavInstance.close();
     }
+  });
+
+  $("#download").on("click", startRecording);
+
+  $("#login-button").on("click", function () {
+    const account = {
+      username: $("#username").val(),
+      password: $("#password").val(),
+      email: $("#email").val()
+    };
+
+    if (account.username === "" || account.password === "" || account.email === "") {
+      $("#errmsg").text("Please fillout everything.")
+    } else {
+      $("#errmsg").text("");
+      $.post("/api/sendaccount", account, function(res) {
+        console.log(res);
+      });
+    }
+
   });
 
   $(window).resize(() => {
