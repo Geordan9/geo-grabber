@@ -41,16 +41,18 @@ export class LoginForm extends Component {
 
   render() {
     return (
-      <Card {...this.props} style={{ width: "21rem", alignSelf: "center" }}>
+      <Card style={{ width: "21rem", alignSelf: "center", marginTop: "64px" }}>
         <div className="flex flex-column m1">
           <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="person" label="Username" />
-          <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="email" label="Email" />
+          { this.props.login ? null : <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="email" label="Email" />}
           <TextField className={classes.button} style={{ flexGrow: "1" }} box withTrailingIcon="lock" label="Password" />
         </div>
         <CardPrimaryAction>
           <CardActions className="flex justify-center">
             <CardActionButtons>
-              <CardAction>Create Account</CardAction>
+              <CardAction onClick={this.props.create}>
+                { this.props.login ? "Login" : "Create Account" }
+              </CardAction>
             </CardActionButtons>
           </CardActions>
         </CardPrimaryAction>
@@ -58,3 +60,4 @@ export class LoginForm extends Component {
     );
   }
 }
+

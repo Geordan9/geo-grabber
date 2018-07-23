@@ -15,24 +15,20 @@ export default () => {
             <Elevation z={8}>
                 <TopAppBarRow>
                     <TopAppBarSection alignStart>
-                        <TopAppBarNavigationIcon use="menu" />
-                        <TopAppBarTitle>Title</TopAppBarTitle>
+                        <TopAppBarTitle>Geo-Grabber</TopAppBarTitle>
                     </TopAppBarSection>
                     <TopAppBarSection alignEnd>
-                        <TopAppBarActionItem aria-label="Download" alt="Download">
-                            file_download
-                        </TopAppBarActionItem>
                         <TopAppBarActionItem
-                            aria-label="Print this page"
-                            alt="Print this page"
+                            aria-label="Go Home"
+                            alt="Go Home"
                         >
-                            print
+                            home
                         </TopAppBarActionItem>
                         <TopAppBarActionItem
                         aria-label="Bookmark this page"
                         alt="Bookmark this page"
                         >
-                            bookmark
+                            person_add
                         </TopAppBarActionItem>
                     </TopAppBarSection>
                 </TopAppBarRow>

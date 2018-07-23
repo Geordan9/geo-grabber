@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 
 import { Button } from 'rmwc/Button';
 import { Grid, GridCell, GridInner } from 'rmwc/Grid';
-import { TextField } from "rmwc/TextField";
 import TopBar from "./components/TopBar.js";
 import Drawer from "./components/Drawer.js";
 import { Elevation } from 'rmwc/Elevation';
 import { LoginForm } from "./components/LoginForm.js";
-import { Select } from 'rmwc/Select';
-import jss from "jss";
-import preset from "jss-preset-default";
-import "./App.css";
 
 import {
   BrowserRouter as Router,
@@ -23,14 +18,6 @@ import {
 
 import { login } from "./API.js";
 
-jss.setup(preset())
-
-const styles = {
-  "w100": {
-    "width": "80%"
-  }
-}
-const { classes } = jss.createStyleSheet(styles).attach()
 
 class App extends Component {
   state = {
@@ -43,6 +30,7 @@ class App extends Component {
           <TopBar />
           <div className="flex">
             <div style={{flexGrow: 1}} className="mt4 flex flex-column">
+              <LoginForm className="mt4" />
               <Drawer 
               open={this.state.tempOpen}
               onClose={() => this.setState({tempOpen: false})}
@@ -66,36 +54,10 @@ class App extends Component {
 
 const GridComp = (props) => {
   return (
-    <Grid style={{width: "90%"}}>
-      <GridCell className="flex justify-center" desktop="12" tablet="8" phone="4">
-        <TextField className={classes.w100} withLeadingIcon="search" label="Search" />
-        <Select
-          className="mt1 ml1"
-          outlined={true}
-          placeholder="Quality"
-          options={['Cookies', 'Pizza', 'Icecream']}
-        />
-      </GridCell>
-      <GridCell className="flex justify-center" desktop="6" tablet="8" phone="4">
-      <video style={{height: "100%"}} id="video-player" controls></video>
-      </GridCell>
-      <GridCell desktop="6" tablet="8" phone="4">
-        <canvas id="c1" style={{display: "none"}}></canvas>
-        <canvas id="c2" style={{display: "none"}}></canvas>
-        <video id="video-player-2" controls></video>
-      </GridCell>
-      <GridCell desktop="12" tablet="8" phone="4">
-        <div className="flex justify-between">
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-          <Button unelevated>Unelevated</Button>
-        </div>
-      </GridCell>
+    <Grid>
+      <GridCell className="flex justify-center" span="4"><Button onClick={props.openDrawer}>Hello World</Button></GridCell>
+      <GridCell className="flex justify-center" span="4"><Elevation z={8}><Button>Hello World</Button></Elevation></GridCell>
+      <GridCell className="flex justify-center" span="4"><Button>Hello World</Button></GridCell>
     </Grid>
   );
 }
@@ -153,7 +115,10 @@ class Login extends React.Component {
     }
 
     return (
-        <LoginForm login={false} create={this.login} />
+      <div className="pt4">
+        <p>You must log in to view the page at {from.pathname}</p>
+        <button onClick={this.login}>Log in</button>
+      </div>
     );
   }
 }
