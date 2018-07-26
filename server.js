@@ -1,26 +1,17 @@
 const express = require("express");
-const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const cheerio = require("cheerio");
-const request = require("request");
-const https = require('https');
-const fs = require('fs');
-
 const db = require("./models");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
 
-app.engine("handlebars", exphbs({
-  defaultLayout: "main"
-}));
-app.set("view engine", "handlebars");
+app.set("port", process.env.PORT || 3001);
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(bodyParser.json());
+
+let authed = false;
 
 app.use(express.static("public"));
 app.use("/materialize", express.static("./node_modules/materialize-css/dist"));
@@ -30,9 +21,17 @@ app.use("/media-recorder", express.static("./node_modules/media-recorder-js"))
 
 mongoose.connect(`mongodb://localhost:27017/accounts`, {useNewUrlParser: true,});
 
-require("./routes/html-routes.js")(app);
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 require("./routes/api-routes.js")(app, db);
 
-app.listen(PORT, () => {
-  console.log(`App listening on PORT ${PORT}`);
+app.post("/login", (req, res) => {
+  if(req.body.pass) authed = true;
+  res.json({authed});
+});
+
+app.listen(app.get("port"), () => {
+  console.log(`Find the server at: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console
 });

@@ -25,32 +25,56 @@ module.exports = (app, db) => {
         request.get(url).pipe(res);
     });
 
-    app.get("/api/webdsp", (req, res) => {
-        console.log();
-    });
-
     app.post("/api/login", (req, res) => {
         const account = req.body;
+        if (!validAccount(account)) {
+            res.send(false);
+            return;
+        }
         findAccount(db, account).then((foundAccount, err) => {
             if (typeof foundAccount != "undefined") {
-                if (account.password === foundAccount.password) {
-                    res.send(true);
-                }
-            } else {
-                res.send(false)
+                res.send(account.password === foundAccount.password ? foundAccount._id : false);
             }
         });
     });
 
     app.post("/api/register", (req, res) => {
         const account = req.body;
+        if (!validAccount(account)) {
+            res.send(false);
+            return;
+        }
         findAccount(db, account).then((foundAccount, err) => {
-            if (typeof foundAccount == "undefined") {
-                createAccount(db, account);
-                res.send("Successfully create account.")
+            if (typeof foundAccount == "undefined" || foundAccount === null) {
+                db.Account.create(account, function (err, acc) {
+                    if (err) {
+                        res.send(false);
+                    } else {
+                        res.send(true);
+                    }
+                });
             } else {
-                res.send("Username already exists!");
+                res.send(false);
             }
+
+        });
+    });
+
+    app.post("/api/savepreset/:id", (req, res) => {
+        const preset = req.body;
+        preset.name = "test";
+        console.log(req.params.id);
+        db.Preset.create(preset)
+        .then(dbPreset => {
+            console.log("test2");
+            db.Account.findOneAndUpdate({_id: req.params.id}, {$push: {presets: dbPreset._id}}, {upsert: true});
+            res.send(true);
+        });
+    });
+
+    app.get("/api/getpresets/:id", (req, res) => {
+        db.Account.findOne({_id: req.params.id}).then((account, err) => {
+            getPresets(account.presets, db, res);
         });
     });
 };
@@ -108,6 +132,20 @@ function findAccount(db, account) {
     }).exec();
 }
 
-function createAccount(db, account) {
-    return db.Account.create(account);
+function validAccount(account) {
+    if (!account.username || !account.password) {
+        return false;
+    }
+    return true;
+}
+
+async function getPresets(presets, db, res) {
+    const presetsArray = [];
+    for (preset of presets){
+        console.log(preset);
+        await db.Preset.findOne({_id: preset._id}).then(preset => {
+            presetsArray.push(preset);
+        });
+    }
+    res.json(presetsArray);
 }

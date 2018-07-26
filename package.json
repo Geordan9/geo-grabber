@@ -1,25 +1,28 @@
 {
-  "name": "geo-grabber",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "name": "geoserver",
+  "version": "0.1.0",
+  "description": "geoserver",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "watch": "nodemon server.js"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "cd client; npm run start",
+    "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geordan9/geo-grabber.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Geordan9/geo-grabber/issues"
+  },
+  "homepage": "https://github.com/Geordan9/geo-grabber#readme",
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "cheerio": "^1.0.0-rc.2",
-    "express": "^4.14.0",
-    "express-handlebars": "^3.0.0",
-    "jquery": "^3.3.1",
-    "material-design-icons": "^3.0.1",
-    "materialize-css": "^1.0.0-rc.2",
-    "media-recorder-js": "^2.1.0",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.0",
+    "express": "^4.16.3",
     "mongoose": "^5.2.4",
     "request": "^2.87.0"
   }
