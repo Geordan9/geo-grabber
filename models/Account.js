@@ -11,6 +11,14 @@ const AccountSchema = new Schema({
     type: String,
     required: true
   },
+  presets: [
+    {type: Schema.Types.ObjectId, ref: 'Preset'}
+  ]
+  
+  
+  
+  
+  /*,
   email: {
     type: String,
     validate: {
@@ -20,7 +28,7 @@ const AccountSchema = new Schema({
       message: '{VALUE} is not a valid e-mail!'
     },
     required: [true, 'E-mail is required.']
-  }
+  }*/
 });
 
 const Account = mongoose.model("Account", AccountSchema);

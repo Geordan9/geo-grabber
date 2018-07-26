@@ -1,3 +1,4 @@
 module.exports = {
-  Account: require("./Account")
+  Account: require("./Account"),
+  Preset: require("./Preset")
 };
